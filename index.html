@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Air Quality Assistant</title>
+
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -13,34 +14,38 @@
             height: 100vh;
         }
 
-        .container {
+        .card {
             background: white;
-            padding: 25px;
+            padding: 30px;
             width: 350px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            border-radius: 12px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.15);
             text-align: center;
         }
 
         h2 {
             color: #2c7a7b;
+            margin-bottom: 20px;
         }
 
         input {
-            width: 90%;
+            width: 100%;
             padding: 10px;
-            margin-top: 10px;
+            margin: 8px 0;
+            border-radius: 6px;
+            border: 1px solid #ccc;
         }
 
         button {
-            width: 95%;
-            padding: 10px;
+            width: 100%;
+            padding: 12px;
             margin-top: 15px;
             background: #2c7a7b;
             color: white;
             border: none;
+            border-radius: 6px;
+            font-size: 15px;
             cursor: pointer;
-            border-radius: 5px;
         }
 
         button:hover {
@@ -55,39 +60,40 @@
 </head>
 <body>
 
-<div class="container">
-    <h2>Air Quality Assistant</h2>
-    <p>Enter AQI value to check air quality</p>
+<div class="card">
+    <h2>🌍 Air Quality Assistant</h2>
 
-    <input type="number" id="aqi" placeholder="Enter AQI value">
+    <input type="text" id="city" placeholder="Enter City Name">
+    <input type="number" id="aqi" placeholder="Enter AQI Value">
 
-    <button onclick="checkAQI()">Check Air Quality</button>
+    <button onclick="analyzeAQI()">Analyze Air Quality</button>
 
     <div class="result" id="result"></div>
 </div>
 
 <script>
-    function checkAQI() {
-        let aqi = document.getElementById("aqi").value;
-        let result = document.getElementById("result");
+function analyzeAQI() {
+    let city = document.getElementById("city").value;
+    let aqi = document.getElementById("aqi").value;
+    let result = document.getElementById("result");
 
-        if (aqi === "") {
-            result.innerHTML = "Please enter AQI value";
-            return;
-        }
-
-        if (aqi <= 50) {
-            result.innerHTML = "Good 😊 – Air quality is satisfactory.";
-        } else if (aqi <= 100) {
-            result.innerHTML = "Moderate 🙂 – Sensitive people should be careful.";
-        } else if (aqi <= 200) {
-            result.innerHTML = "Poor 😷 – Wear a mask outdoors.";
-        } else if (aqi <= 300) {
-            result.innerHTML = "Very Poor 🚨 – Avoid going outside.";
-        } else {
-            result.innerHTML = "Severe ☠️ – Health emergency!";
-        }
+    if (city === "" || aqi === "") {
+        result.innerHTML = "Please enter both city and AQI value";
+        return;
     }
+
+    if (aqi <= 50) {
+        result.innerHTML = city + ": Good 😊 – Safe air quality.";
+    } else if (aqi <= 100) {
+        result.innerHTML = city + ": Moderate 🙂 – Sensitive people be careful.";
+    } else if (aqi <= 200) {
+        result.innerHTML = city + ": Poor 😷 – Wear mask outdoors.";
+    } else if (aqi <= 300) {
+        result.innerHTML = city + ": Very Poor 🚨 – Avoid going outside.";
+    } else {
+        result.innerHTML = city + ": Severe ☠️ – Health emergency!";
+    }
+}
 </script>
 
 </body>
