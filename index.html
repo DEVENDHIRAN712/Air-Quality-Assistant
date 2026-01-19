@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Air Quality Assistant</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #eef7f6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background: white;
+            padding: 25px;
+            width: 350px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        h2 {
+            color: #2c7a7b;
+        }
+
+        input {
+            width: 90%;
+            padding: 10px;
+            margin-top: 10px;
+        }
+
+        button {
+            width: 95%;
+            padding: 10px;
+            margin-top: 15px;
+            background: #2c7a7b;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background: #285e61;
+        }
+
+        .result {
+            margin-top: 15px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Air Quality Assistant</h2>
+    <p>Enter AQI value to check air quality</p>
+
+    <input type="number" id="aqi" placeholder="Enter AQI value">
+
+    <button onclick="checkAQI()">Check Air Quality</button>
+
+    <div class="result" id="result"></div>
+</div>
+
+<script>
+    function checkAQI() {
+        let aqi = document.getElementById("aqi").value;
+        let result = document.getElementById("result");
+
+        if (aqi === "") {
+            result.innerHTML = "Please enter AQI value";
+            return;
+        }
+
+        if (aqi <= 50) {
+            result.innerHTML = "Good 😊 – Air quality is satisfactory.";
+        } else if (aqi <= 100) {
+            result.innerHTML = "Moderate 🙂 – Sensitive people should be careful.";
+        } else if (aqi <= 200) {
+            result.innerHTML = "Poor 😷 – Wear a mask outdoors.";
+        } else if (aqi <= 300) {
+            result.innerHTML = "Very Poor 🚨 – Avoid going outside.";
+        } else {
+            result.innerHTML = "Severe ☠️ – Health emergency!";
+        }
+    }
+</script>
+
+</body>
+</html>
